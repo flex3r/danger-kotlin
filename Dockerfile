@@ -24,6 +24,7 @@ RUN cd /usr/lib && \
     make install && \
     rm -rf /usr/local/_danger-kotlin
 
+ENV JAVA_OPTS="-Xmx4G"
 ENV PATH $PATH:/usr/lib/kotlinc/bin
 
 # Run Danger Kotlin via Danger JS, allowing for custom args
