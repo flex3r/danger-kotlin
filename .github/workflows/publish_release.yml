@@ -30,7 +30,7 @@ jobs:
     strategy:
       fail-fast: false
       matrix:
-        target: [ { os: ubuntu-latest, compiler: linuxX64 }, { os: macos-latest, compiler: macosX64 }, { os: macos-latest, compiler: macosArm64 } ]
+        target: [ { os: ubuntu-latest, compiler: linuxX64 } ]
 
     runs-on: ${{ matrix.target.os }}
 
