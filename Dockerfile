@@ -8,7 +8,7 @@ LABEL "com.github.actions.icon"="zap"
 LABEL "com.github.actions.color"="blue"
 
 ARG KOTLINC_VERSION="2.0.21"
-ARG DANGER_KOTLIN_VERSION="1.3.1"
+ARG DANGER_KOTLIN_VERSION="1.5.0"
 ARG DANGER_JS_VERSION="11.3.1"
 
 # Install dependencies
@@ -20,11 +20,14 @@ RUN wget -q "https://github.com/JetBrains/kotlin/releases/download/v$KOTLINC_VER
     unzip "kotlin-compiler-$KOTLINC_VERSION.zip" -d /usr/lib && \
     rm "kotlin-compiler-$KOTLINC_VERSION.zip"
 ENV PATH $PATH:/usr/lib/kotlinc/bin
+ENV JAVA_OPTS="-Xmx4G"
 
 # Install Danger-JS
 RUN npm install -g "danger@$DANGER_JS_VERSION"
 
 # Install Danger-Kotlin
-RUN wget -q "https://github.com/danger/kotlin/releases/download/$DANGER_KOTLIN_VERSION/danger-kotlin-linuxX64.tar" && \
+RUN wget -q "https://github.com/flex3r/danger-kotlin/releases/download/$DANGER_KOTLIN_VERSION/danger-kotlin-linuxX64.tar" && \
     tar -xvf "danger-kotlin-linuxX64.tar" -C /usr/local &&  \
     rm "danger-kotlin-linuxX64.tar"
+
+ENTRYPOINT ["danger-kotlin", "ci"]
